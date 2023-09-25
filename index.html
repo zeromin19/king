@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+    <script>
+        function messagesubmit(){
+            var newMessage = document.createElement("div");
+            newMessage.innerHTML = document.getElementById("message").value;
+            newMessage.onclick = removeMessage;
+            document.getElementById("messageList").appendChild(newMessage);
+            saveMessage();
+        }
+        function removeMessage(){
+            document.getElementById("messageList").removeChild(this);
+            saveMessage();
+        }
+        function saveMessage(){
+            localStorage.saveMessageList = document.getElementById("messageList").innerHTML;
+        }
+        function loadMessage(){
+            document.getElementById("messageList").innerHTML = localStorage.saveMessageList;
+            for(var i=0; i< messageList.children.length; i++){
+                messageList.children[i].onclick=removeMessage;
+            }
+        }
+        </script>
+</head>
+<body>
+    <h2> My page에 오신 것을 환영합니다!</h2>
+    방명록을 작성해주세요<br/><br/>
+    <div class="container">
+        <input id=message type="text"/><br/>
+        <div class="messageContainer">
+        <input id="submit" type="button" value="입력" onclick="messagesubmit();"></div>
+        <br/><br/>
+        <div id="messageList">
+            <script>
+                if(localStorage.saveMessageList){
+                    loadMessage();
+                }
+            </script>
+        </div>
+    </div>
+
+</body>
+</html>
